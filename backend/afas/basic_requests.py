@@ -1,6 +1,6 @@
 import requests
 
-def test_connection(link, token, connector, show_print=False):
+def test_afas_connection(link, token, connector, show_print=False):
     endpoint = f"{link}{connector}"
     headers = {
         'authorization': token,

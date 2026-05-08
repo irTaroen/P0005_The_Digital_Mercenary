@@ -1,6 +1,6 @@
 from urllib.parse import quote
 
-def build_params(filters):
+def build_afas_query_params(filters):
     def _build(filters, date_fields=None):
         params = "skip=-1&take=-1"
         if filters:

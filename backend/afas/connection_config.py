@@ -5,7 +5,7 @@ def encode_base64_token(text):
     return base64.b64encode(text.encode("utf-8")).decode("utf-8")
 
 
-def create_afas_connection_data(omgeving_id, token_live, token_test):
+def create_afas_connection_config(omgeving_id, token_live, token_test):
     base_live = f"https://{omgeving_id}.rest.afas.online/ProfitRestServices"
     base_test = f"https://{omgeving_id}.resttest.afas.online/ProfitRestServices"
     return {
