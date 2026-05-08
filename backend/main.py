@@ -3,6 +3,9 @@ import json5
 from dotenv import load_dotenv
 from pprint import pprint
 
+from afas.afas_connection import create_afas_connection_data
+from afas.afas_basic_requests import get_afas_data, test_connection
+
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "..", ".env"))
 
 raw = os.getenv("CLIENT_TOKENS", "{}")
@@ -18,9 +21,28 @@ def get_client(name: str) -> dict:
 
 
 if __name__ == "__main__":
-    print("All clients:", list(client_tokens.keys()))
+    CLIENT = "Voxtur"
+    OMGEVING = "TEST"
+    # print("All clients:", list(client_tokens.keys()))
 
-    client_name = "Essers"
-    config = get_client(client_name)
-    print(f"{client_name} config:")
-    pprint(config)
+    config = get_client(CLIENT)
+    # print(f"{CLIENT} config:")
+
+    # Create AFAS connection data
+    afas_connection_data = create_afas_connection_data(config["omgeving"], config["token_live"], config["token_test"])[OMGEVING]
+    afas_base = afas_connection_data["base"]
+    afas_link = afas_connection_data["link"]
+    afas_token = afas_connection_data["token_encoded"]
+
+
+    # Connectoren
+    connectoren = json5.load(open("config/get_connectors.json"))
+    connector_connection = connectoren["connection"]
+    connector_verlofboekingen = connectoren["verlofboekingen"]
+
+    # # Test connection
+    # afas_connection_test_data = test_connection(afas_base, afas_token, connector_connection)
+
+    # Get verlofboekingen
+    afas_verlofboekingen = get_afas_data(afas_link, afas_token, connector_verlofboekingen, "")
+    pprint(len(afas_verlofboekingen))
