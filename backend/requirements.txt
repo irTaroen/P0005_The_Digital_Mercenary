@@ -1,7 +1,5 @@
 fastapi
 uvicorn[standard]
-supabase
-cryptography
 python-dotenv
 requests
 json5
