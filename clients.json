@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "name": "Zig",
+    "omgeving": 62333,
+    "token_live": "<token><version>1</version><data>FA5515312E0248B28F17A8F9854F5A27C7753B4EC98F45DC9C29A3D29C1B391F</data></token>",
+    "token_test": ""
+  }
+]

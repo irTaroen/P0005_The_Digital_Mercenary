@@ -20,7 +20,7 @@ app.add_middleware(
 
 
 class ClientPayload(BaseModel):
-    name: str
+    name: str 
     omgeving: int
     token_live: str
     token_test: str
