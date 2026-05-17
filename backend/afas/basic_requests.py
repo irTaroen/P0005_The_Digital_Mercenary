@@ -1,3 +1,4 @@
+from os import PRIO_USER
 import requests
 
 def test_afas_connection(link, token, connector, show_print=False):
@@ -39,3 +40,48 @@ def get_afas_data(link, token, connector, params, show_print=False):
         return response.json()['rows']
     else:
         return []
+
+def post_afas_data(link, token, connector, payload, show_print=False):
+    endpoint = f"{link}{connector}"
+    headers = {
+        'authorization': token,
+        'content-type': "application/json",
+        'accept': "application/json",
+        'accept-language': "nl-nl"
+    }
+
+    response = requests.post(url=endpoint, headers=headers, json=payload)
+    statuscode = response.status_code
+
+    if show_print:
+        omgeving = "TEST" if "resttest" in link else "LIVE"
+        print(f"{omgeving} - {connector}: {statuscode}")
+
+    if statuscode == 201:
+        return statuscode
+    else:
+        print(f"{statuscode}: {response.text}")
+        return statuscode
+
+
+def put_afas_data(link, token, connector, payload, show_print=False):
+    endpoint = f"{link}{connector}"
+    headers = {
+        'authorization': token,
+        'content-type': "application/json",
+        'accept': "application/json",
+        'accept-language': "nl-nl"
+    }
+
+    response = requests.put(url=endpoint, headers=headers, json=payload)
+    statuscode = response.status_code
+
+    if show_print:
+        omgeving = "TEST" if "resttest" in link else "LIVE"
+        print(f"{omgeving} - {connector}: {statuscode}")
+
+    if statuscode == 201:
+        return statuscode
+    else:
+        print(f"{statuscode}: {response.text}")
+        return statuscode
