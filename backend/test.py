@@ -20,4 +20,4 @@ path_update_connectoren = os.path.abspath(os.path.join(os.path.dirname(__file__)
 get_connectoren = json.load(open(path_get_connectoren))
 update_connectoren = json.load(open(path_update_connectoren))
 
-verloefboekingen = reopen_verlofboekingen(client_connection_config, get_connectoren, update_connectoren, "Correctie: Toevoegen Project")
+reopen_verlofboekingen(client_connection_config, get_connectoren, update_connectoren, "Correctie: Toevoegen Project")
